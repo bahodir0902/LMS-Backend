@@ -14,6 +14,9 @@ class CustomUserManager(BaseUserManager):
         user.set_password(password)
 
         user.save(using=self._db)
+
+        UserProfile.objects.get_or_create(user=user)
+
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
@@ -26,6 +29,5 @@ class CustomUserManager(BaseUserManager):
         user.role = Role.ADMIN
         user.save(using=self._db)
 
-        UserProfile.objects.create(user=user)
         admin_groups, _ = Group.objects.get_or_create(name="Admins")
         user.groups.add(admin_groups)
