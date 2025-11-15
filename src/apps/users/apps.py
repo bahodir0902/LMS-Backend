@@ -6,4 +6,4 @@ class UsersConfig(AppConfig):
     name = "src.apps.users"
 
     def ready(self):
-        from .signals import add_superuser_to_admins_group  # noqa E402
+        from .signals import add_superuser_to_admins_group, create_user_profile  # noqa E402
